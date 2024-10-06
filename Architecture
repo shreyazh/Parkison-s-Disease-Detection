@@ -1,0 +1,92 @@
+Architecture
+
+The architecture of the Parkinson's Disease Detection Model can be broken down into several key components, each representing a stage in the machine learning pipeline. Here’s an outline of the architecture:
+
+1. Data Layer
+Data Source: The model uses a dataset stored in a CSV file (parkinsons.csv), which contains various features related to the diagnosis of Parkinson's disease.
+Data Loading: The dataset is loaded into a Pandas DataFrame, making it accessible for analysis and processing.
+
+2. Data Processing Layer
+Exploratory Data Analysis (EDA): Basic EDA is performed to understand the data structure, check for missing values, and analyze the distribution of the target variable (status), which indicates whether a person is healthy or has Parkinson's.
+Feature Engineering: Features not relevant to model training, such as name, are removed. The target variable status is separated from the features for further processing.
+Data Splitting: The dataset is divided into training and testing sets, with 80% used for training and 20% for testing.
+Data Standardization: A StandardScaler is used to standardize the feature data, which helps in stabilizing the model's performance and ensuring consistency across different features.
+
+3. Model Training Layer
+Model Selection: A Support Vector Machine (SVM) classifier with a linear kernel is chosen for classification, given its effectiveness in binary classification tasks.
+Training: The SVM model is trained using the standardized training data. This step involves finding the optimal decision boundary that separates the two classes: healthy and Parkinson's positive.
+
+4. Model Evaluation Layer
+Accuracy Measurement: The model's accuracy is assessed on both training and testing sets using the accuracy_score metric. This helps evaluate how well the model has learned from the data and how it generalizes to unseen data.
+
+5. Prediction Layer
+Input Data Processing: New data for prediction is first converted into a format suitable for the model (NumPy array), reshaped, and then standardized using the same scaler that was applied to the training data.
+Prediction: The model makes a prediction based on the input data, outputting whether the person is likely to have Parkinson's disease.
+Output: Based on the model's prediction, a message is displayed indicating whether the input data suggests Parkinson's presence.
+
+6. User Interface (Optional)
+Command-Line Interface: Currently, the model runs as a script where predictions are made by entering input data directly in the code. However, this can be expanded into a simple CLI or integrated into a more comprehensive interface for broader usage.
+Visual Representation of the Architecture:
+sql
++--------------------+
+|   Data Layer       |
+|                    |
+|   +--------------+ |
+|   | CSV Dataset  | |
+|   +--------------+ |
++--------------------+
+           |
+           v
++--------------------+
+| Data Processing    |
+| Layer              |
+|                    |
+| +----------------+ |
+| | EDA            | |
+| | Feature Eng.   | |
+| | Splitting      | |
+| | Standardization| |
+| +----------------+ |
++--------------------+
+           |
+           v
++--------------------+
+| Model Training     |
+| Layer              |
+|                    |
+| +----------------+ |
+| | SVM Training   | |
+| +----------------+ |
++--------------------+
+           |
+           v
++--------------------+
+| Model Evaluation   |
+| Layer              |
+|                    |
+| +----------------+ |
+| | Accuracy       | |
+| +----------------+ |
++--------------------+
+           |
+           v
++--------------------+
+| Prediction Layer   |
+|                    |
+| +----------------+ |
+| | Input Data    | |
+| | Standardize   | |
+| | Predict       | |
+| +----------------+ |
++--------------------+
+           |
+           v
++--------------------+
+| User Interface     |
+| (CLI or App)       |
+|                    |
+| +----------------+ |
+| | Display Result | |
+| +----------------+ |
++--------------------+
+This architecture illustrates the flow of data from initial loading, through processing, model training, evaluation, and finally prediction and output, showing how each layer contributes to the Parkinson's Disease Detection Model.
